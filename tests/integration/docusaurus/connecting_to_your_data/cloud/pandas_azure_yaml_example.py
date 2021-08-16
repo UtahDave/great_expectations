@@ -108,8 +108,4 @@ assert set(
     context.get_available_data_asset_names()["my_azure_datasource"][
         "default_configured_data_connector_name"
     ]
-) == {
-    "2019/yellow_trip_data_sample_2019-01.csv",
-    "2019/yellow_trip_data_sample_2019-02.csv",
-    "2019/yellow_trip_data_sample_2019-03.csv",
-}
+) == {"taxi"}
