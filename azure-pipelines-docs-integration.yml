@@ -118,3 +118,6 @@ stages:
             GOOGLE_APPLICATION_CREDENTIALS: $(gcp_authkey.secureFilePath)
             GCP_PROJECT: $(GCP_PROJECT)
             GCP_BIGQUERY_DATASET: $(GCP_BIGQUERY_DATASET)
+            # Azure Blob Storage credentials
+            AZURE_CONN_STR: $(AZURE_CONN_STR)
+            AZURE_CONTAINER_CREDENTIAL: $(AZURE_CONTAINER_CREDENTIAL)
