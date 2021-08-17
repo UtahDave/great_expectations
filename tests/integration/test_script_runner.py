@@ -37,22 +37,21 @@ docs_test_matrix = [
         "util_script": "tests/integration/docusaurus/connecting_to_your_data/database/util.py",
         "extra_backend_dependencies": BackendDependencies.BIGQUERY,
     },
-    # TODO(cdkini): Get all these tests working!
     {
-        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_yaml_example.py",
+        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_yaml_example/configured_asset_azure_data_connector.py",
+        "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
+    },
+    {
+        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_python_example/configured_asset_azure_data_connector.py",
         "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     },
     # {
-    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_python_example.py",
+    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_yaml_example/inferred_asset_azure_data_connector.py",
     #     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     # },
     # {
-    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/spark_azure_yaml_example.py",
-    #     "extra_backend_dependencies": BackendDependencies.SPARK,
-    # },
-    # {
-    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/spark_azure_python_example.py",
-    #     "extra_backend_dependencies": BackendDependencies.SPARK,
+    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_python_example/inferred_asset_azure_data_connector.py",
+    #     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     # },
     # {
     #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_s3_yaml_example.py",
