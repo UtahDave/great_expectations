@@ -5,7 +5,6 @@ from ruamel import yaml
 import great_expectations as ge
 from great_expectations.core.batch import BatchRequest, RuntimeBatchRequest
 
-ACCOUNT_URL = os.getenv("AZURE_ACCOUNT_URL", "")
 CREDENTIAL = os.getenv("AZURE_CREDENTIAL", "")
 
 context = ge.get_context()
@@ -44,11 +43,13 @@ datasource_config = {
 
 # Please note this override is only to provide good UX for docs and tests.
 # In normal usage you'd set your path directly in the yaml above.
-datasource_config["execution_engine"]["azure_options"]["account_url"] = ACCOUNT_URL
+datasource_config["execution_engine"]["azure_options"][
+    "account_url"
+] = "superconductivetests.blob.core.windows.net"
 datasource_config["execution_engine"]["azure_options"]["credential"] = CREDENTIAL
 datasource_config["data_connectors"]["default_configured_data_connector_name"][
     "azure_options"
-]["account_url"] = ACCOUNT_URL
+]["account_url"] = "superconductivetests.blob.core.windows.net"
 datasource_config["data_connectors"]["default_configured_data_connector_name"][
     "azure_options"
 ]["credential"] = CREDENTIAL
@@ -78,7 +79,7 @@ batch_request = RuntimeBatchRequest(
 # In normal usage you'd set your path directly in the BatchRequest above.
 batch_request.runtime_parameters[
     "path"
-] = f"{ACCOUNT_URL}/superconductive-public/data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_2018-01.csv"
+] = f"superconductivetests.blob.core.windows.net/superconductive-public/data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_2018-01.csv"
 
 context.create_expectation_suite(
     expectation_suite_name="test_suite", overwrite_existing=True

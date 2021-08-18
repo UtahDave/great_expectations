@@ -5,7 +5,6 @@ from ruamel import yaml
 import great_expectations as ge
 from great_expectations.core.batch import BatchRequest, RuntimeBatchRequest
 
-ACCOUNT_URL = os.getenv("AZURE_ACCOUNT_URL", "")
 CREDENTIAL = os.getenv("AZURE_CREDENTIAL", "")
 
 context = ge.get_context()
@@ -47,7 +46,9 @@ datasource_yaml = datasource_yaml.replace(
 datasource_yaml = datasource_yaml.replace(
     "<CONTAINER_PATH_TO_DATA>", "data/taxi_yellow_trip_data_samples/"
 )
-datasource_yaml = datasource_yaml.replace("<YOUR_ACCOUNT_URL>", ACCOUNT_URL)
+datasource_yaml = datasource_yaml.replace(
+    "<YOUR_ACCOUNT_URL>", "superconductivetests.blob.core.windows.net"
+)
 datasource_yaml = datasource_yaml.replace("<YOUR_CREDENTIAL>", CREDENTIAL)
 
 context.test_yaml_config(datasource_yaml)
@@ -69,7 +70,7 @@ batch_request = RuntimeBatchRequest(
 # In normal usage you'd set your path directly in the BatchRequest above.
 batch_request.runtime_parameters[
     "path"
-] = f"{ACCOUNT_URL}/superconductive-public/data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_2018-01.csv"
+] = f"superconductivetests.blob.core.windows.net/superconductive-public/data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_2018-01.csv"
 
 context.create_expectation_suite(
     expectation_suite_name="test_suite", overwrite_existing=True
