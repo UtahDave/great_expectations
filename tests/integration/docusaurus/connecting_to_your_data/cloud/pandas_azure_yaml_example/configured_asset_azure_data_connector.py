@@ -1,7 +1,12 @@
+import os
+
 from ruamel import yaml
 
 import great_expectations as ge
 from great_expectations.core.batch import BatchRequest, RuntimeBatchRequest
+
+ACCOUNT_URL = os.getenv("AZURE_ACCOUNT_URL", "")
+CREDENTIAL = os.getenv("AZURE_CREDENTIAL", "")
 
 context = ge.get_context()
 
@@ -25,13 +30,13 @@ data_connectors:
             credential: <YOUR_CREDENTIAL>   # if using a protected container
         container: <YOUR_AZURE_CONTAINER_HERE>
         name_starts_with: <CONTAINER_PATH_TO_DATA>
+        assets:
+            taxi_data:
         default_regex:
-            pattern: 2019/yellow_trip_data_sample_(\\d{{4}})-(\\d{{2}})\\.csv
+            pattern: data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_(\\d{{4}})-(\\d{{2}})\\.csv
             group_names:
                 - year
                 - month
-        assets:
-            taxi:
 """
 
 # Please note this override is only to provide good UX for docs and tests.
@@ -39,13 +44,11 @@ data_connectors:
 datasource_yaml = datasource_yaml.replace(
     "<YOUR_AZURE_CONTAINER_HERE>", "superconductive-public"
 )
-datasource_yaml = datasource_yaml.replace("<CONTAINER_PATH_TO_DATA>", "2019/")
 datasource_yaml = datasource_yaml.replace(
-    "<YOUR_ACCOUNT_URL>", "superconductivetests.blob.core.windows.net"
+    "<CONTAINER_PATH_TO_DATA>", "data/taxi_yellow_trip_data_samples/"
 )
-datasource_yaml = datasource_yaml.replace(  # We are using a public container
-    "credential: <YOUR_CREDENTIAL>", ""
-)
+datasource_yaml = datasource_yaml.replace("<YOUR_ACCOUNT_URL>", ACCOUNT_URL)
+datasource_yaml = datasource_yaml.replace("<YOUR_CREDENTIAL>", CREDENTIAL)
 
 context.test_yaml_config(datasource_yaml)
 
@@ -66,7 +69,7 @@ batch_request = RuntimeBatchRequest(
 # In normal usage you'd set your path directly in the BatchRequest above.
 batch_request.runtime_parameters[
     "path"
-] = "superconductivetests.blob.core.windows.net/superconductive-public/2019/yellow_trip_data_sample_2019-01.csv"
+] = f"{ACCOUNT_URL}/superconductive-public/data/taxi_yellow_trip_data_samples/yellow_trip_data_sample_2018-01.csv"
 
 context.create_expectation_suite(
     expectation_suite_name="test_suite", overwrite_existing=True
@@ -90,7 +93,7 @@ batch_request = BatchRequest(
 
 # Please note this override is only to provide good UX for docs and tests.
 # In normal usage you'd set your data asset name directly in the BatchRequest above.
-batch_request.data_asset_name = "taxi"
+batch_request.data_asset_name = "taxi_data"
 
 context.create_expectation_suite(
     expectation_suite_name="test_suite", overwrite_existing=True
@@ -108,4 +111,4 @@ assert set(
     context.get_available_data_asset_names()["my_azure_datasource"][
         "default_configured_data_connector_name"
     ]
-) == {"taxi"}
+) == {"taxi_data"}
