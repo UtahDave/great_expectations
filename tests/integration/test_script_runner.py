@@ -38,21 +38,13 @@ docs_test_matrix = [
         "extra_backend_dependencies": BackendDependencies.BIGQUERY,
     },
     {
-        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_yaml_example/configured_asset_azure_data_connector.py",
+        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/azure/pandas/yaml_example.py",
         "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     },
     {
-        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_python_example/configured_asset_azure_data_connector.py",
+        "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/azure/pandas/python_example.py",
         "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     },
-    # {
-    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_yaml_example/inferred_asset_azure_data_connector.py",
-    #     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
-    # },
-    # {
-    #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_azure_python_example/inferred_asset_azure_data_connector.py",
-    #     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
-    # },
     # {
     #     "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/cloud/pandas_s3_yaml_example.py",
     #     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
